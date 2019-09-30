@@ -1,0 +1,182 @@
+swagger: "2.0"
+info:
+  title: Sample API
+  description: sample api.
+  version: 1.0.0
+host: localhost:9000
+basePath: /employee
+schemes:
+  - http
+paths:
+  /findById/{Id}:
+    get:
+      summary: Returns a user by ID.
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          type: integer
+          minimum: 1
+          description: cannot be a negative value.
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Employee'
+        400:
+          description: The specified employee ID is invalid .
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: A employee with the specified ID was not found.
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        default:
+          description: Unexpected server error   
+          schema:
+            $ref: '#/definitions/ErrorModel'
+            
+            
+  /create:
+    post:
+      summary: Creates a new Employee and returns the employee data created.
+      parameters:
+        - in: body
+          name: employee
+          schema:
+            $ref: '#/definitions/Employee'
+            
+      responses:
+        200:
+          description: OK  
+          schema:
+            $ref: '#/definitions/Employee'
+        400:
+          description: The specified employee data is invalid .
+          schema:
+            $ref: '#/definitions/ErrorModel'
+       
+        default:
+          description: Unexpected server error  
+          schema:
+            $ref: '#/definitions/ErrorModel'
+            
+            
+  /deleteById/{Id}:
+   delete:
+      summary: deleted a user by ID and returns the employee data.
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          type: integer
+          minimum: 1
+          description: cannot be a negative value.
+            
+      responses:
+        200:
+          description: OK  
+          schema:
+            $ref: '#/definitions/Employee'
+        400:
+          description: The specified employee ID is invalid .
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: A employee with the specified ID was not found.
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        default:
+          description: Unexpected server error    
+          schema:
+            $ref: '#/definitions/ErrorModel'  
+  /query:
+    get:
+      description: query parameter to find employees by starting letter of their name and to limit number the results.
+      operationId: findEmployees
+      parameters:
+        - name: nameStartLetter
+          in: query
+          description: filtering based on starting letter of name
+          required: true
+          type: string
+          items:
+            type: string
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: pet response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Employee'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'          
+            
+            
+definitions:
+  Employee:
+    properties:
+      id:
+        type: integer
+        example : 4
+      name:
+        type: string
+        example: "deva"
+      education :
+          $ref: '#/definitions/education'
+    
+    required:  
+      - id
+      - name
+      
+  ErrorModel:
+    type: object
+    required:
+    - message
+    - code
+    properties:
+      message:
+        type: string
+      code:
+        type: integer
+        minimum: 100
+        maximum: 600
+  
+  
+  school:
+    type : object
+    properties:
+      schoolName :
+        type : string
+      schoolCompletedYear :
+        type : integer
+    required:
+      - schoolName
+      - schoolCompletedYear
+  
+  college:
+      required:
+      - collegeName
+      - collegeCompletedYear
+      properties:
+        collegeName :
+          type : string
+        collegeCompletedYear :
+          type : integer 
+ 
+  education:
+   properties:
+        college :
+          $ref: '#/definitions/college'
+        school :
+          $ref: '#/definitions/school'
+         
+ 
+ 
