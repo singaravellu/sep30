@@ -1,0 +1,37 @@
+ CORE SERVICES YOU NEED TO KNOW VERY WELL.
+
+EC2 (AZ, auto-scaling, load balancer, security group)
+VPC (subnet, NAT gateway, BastionHost, Network ACL)
+S3 (different S3 classes, encryption, versioning, cross-region replication, lifecycle)
+RDS (multi-AZ, cross-region replication)
+
+you need to know which services are az specific,global and region specific.
+
+Az -ebs volumes,ec2 instances,subnets,placement group and redshift.
+global-iam ,cloudfront ,route53,waf and s3.
+and remaining all are region specific.
+
+FOR ABOVE TOPICS REFER JAYENDRAPATIL'S WEBSITE.IT WILL BE VERY USEFULL.
+
+
+Storage: Glacier, DynamoDB, Storage gateway, Aurora ,ElastiCache, Redshift, EFS
+Compute: Lambda, ECS, Elastic Beanstalk
+Networking: Route53, API Gateway, CloudFront, aws storage gateway.
+Management & Monitoring: IAM, CloudWatch, CloudFormation, KMS
+Analytics: Kinesis, Athena
+Applications: SQS, SNS and SWF.
+
+
+kinesis for iot devices
+EMR for bigdata
+Redshift -st
+
+
+
+qwiklabs for doing labs for the core services such as ec2,vpc,s3 ,rds and iam for free.
+
+
+
+
+
+

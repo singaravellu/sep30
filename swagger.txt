@@ -1,0 +1,7 @@
+https://dev.to/dianamaltseva8/why-use-swagger-for-creating-and-documenting-apis-115l
+
+https://swagger.io/docs/specification/about/
+
+https://swagger.io/docs/specification/basic-structure/
+
+installed swagger editor locally
