@@ -1,0 +1,4 @@
+com\example\JacocoDemo\pojo\Employee.class
+com\example\JacocoDemo\service\EmployeeService.class
+com\example\JacocoDemo\JacocoDemoApplication.class
+com\example\JacocoDemo\controller\EmployeeController.class
