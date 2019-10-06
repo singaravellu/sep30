@@ -1,0 +1,85 @@
+Elastic Cloud Compute – EC2 Overview
+ 
+ -Elastic Compute Cloud (EC2) provides scalable computing capacity in the Amazon Web Services (AWS) cloud.
+ -EC2 eliminates the need to invest in hardware up front, so applications can be developed and deployed faster.
+ -EC2 can be used to launch as many or as few virtual servers as you need, configure security and networking, and manage storage.
+ -EC2 enables you to scale up or down to handle changes in requirements or spikes in popularity, reducing your need to forecast traffic.
+
+EC2 features
+ -Virtual computing environments, known as Ec2 instances
+ -Preconfigured templates for your instances, known as Amazon Machine Images (AMIs), that package the bits you need for your server (including the operating system and additional software)
+ -Various configurations of CPU, memory, storage, and networking capacity for your instances, known as Instance types
+ -Secure login information for your instances using key pairs (AWS stores the public key, and you store the private key in a secure place)
+ -Storage volumes for temporary data that’s deleted when you stop or terminate your instance, known as Instance store volumes
+ -Persistent storage volumes for your data using Amazon Elastic Block Store (Amazon EBS), known as Amazon EBS volumes
+ -Multiple physical locations for your resources, such as instances and Amazon EBS volumes, known as Regions and Availability Zones
+ -A firewall that enables you to specify the protocols, ports, and source IP ranges that can reach your instances using security groups
+ -Static IP addresses for dynamic cloud computing, known as Elastic IP addresses
+ -Metadata, known as tags, can be created and assigned to EC2 resources
+ -Virtual networks you can create that are logically isolated from the rest of the AWS cloud, and that you can optionally connect to your own network, known as Virtual private clouds (VPCs)
+
+EC2 Security Groups
+ -An EC2 instance, when launched, can be associated with one or more security groups with the instance, which acts as a virtual firewall that controls the traffic to that instance
+ -Security groups helps specify rules that control the inbound traffic that’s allowed to reach the instances and the outbound traffic that’s allowed to leave the instance
+ -Rules for a security group can be modified at any time; the new rules are automatically applied to all instances associated with the security group.
+ -Security groups are stateful — if you send a request from your instance, the response traffic for that request is allowed to flow in regardless of inbound security group rules. For VPC security groups, this also means that responses to allowed inbound traffic are allowed to flow out, regardless of outbound rules
+
+Amazon provides different ways to pay for the EC2 instances
+ -On-Demand Instances
+ -Reserved Instances
+ -Spot Instances
+
+dedicated instances(additional charges applied)
+-Dedicated Instances are EC2 instances that run in a VPC on hardware that’s dedicated to a single customer
+
+status checks:
+	- tatus monitoring help quickly determine whether EC2 has detected any problems that might prevent instances from running applications.
+	  EC2 performs automated checks on every running EC2 instance to identify hardware and software issues
+ - instance status check : where aws user will be responsible and he should take care of their instance.
+     -When an instance status check fails, it can be resolved by either rebooting the instance or by making modifications in the operating system
+       -Instance status checks failure might be cause of
+	-Failed system status checks
+	-Misconfigured networking or startup configuration
+	-Exhausted memory
+	-Corrupted file system
+	-Incompatible kernel
+
+ - system status check : monitor the AWS systems required to use your instance to ensure they are working properly.
+
+cloudwatch :
+ - By default Basic monitoring is enabled and EC2 metric data is sent to CloudWatch in 5-minute periods automatically
+ - Aggregate statistics are available for the instances that have detailed monitoring (at an additional charge) enable, which provides data in 1-minute periods
+ 
+CloudWatch alarms
+	- can be created to monitor any one of the EC2 instance’s metrics.
+	- can be configured to automatically send you a notification when the metric reaches a specified threshold.
+
+      cloudwatch never show memory metrics
+
+EC2 Troubleshooting Connecting to Your Instance
+
+ Error connecting to your instance: Connection timed out
+ - Route table, for the subnet, does not have a  route that sends all traffic destined outside the VPC to the Internet gateway for the VPC.
+ -Security group does not allow inbound traffic from the public ip address on the proper port
+ -ACL does not allow inbound traffic from and outbound traffic to the public ip address on the proper port
+ -Private key used to connect does not match with key that corresponds to the key pair selected for the instance during the launch
+ -Appropriate user name for the AMI is not used for e.g. user name for Amazon Linux AMI is ec2-user, Ubuntu AMI is ubuntu, RHEL5 AMI & SUSE Linux can be either root or ec2-user, Fedora AMI can be fedora or ec2-user
+ -If connecting from an corporate network, the internal firewall does not
+ -allow inbound and outbound traffic on port 22 (for Linux instances) or port 3389 (for Windows instances).
+ -Instance does not the same public IP address, which change during restarts. Associate an Elastic IP address with the instance
+ -CPU load on the instance is high; the server may be overloaded.
+
+private ip addresses and public ip addresses
+
+ - public ip changes on rebooting the system
+
+
+ Placement Groups
+- Cluster – packs instances close together inside an Availability Zone. This strategy enables workloads to achieve the low-latency network performance necessary for tightly-coupled node-to-node communication that is typical of HPC applications.
+
+- Partition – spreads your instances across logical partitions such that groups of instances in one partition do not share the underlying hardware with groups of instances in different partitions. This strategy is typically used by large distributed and replicated workloads, such as Hadoop, Cassandra, and Kafka.
+
+- Spread – strictly places a small group of instances across distinct underlying hardware to reduce correlated failures.
+
+
+
