@@ -29,7 +29,7 @@ public class EmpController {
 		System.out.println(employee.toString());
 		
 		Employee emp = new Employee(1, "dev", "d", "c");
-		return empService.create(emp);
+		return empService.create(employee);
 
 	}
 
